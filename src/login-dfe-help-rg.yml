@@ -28,5 +28,6 @@ jobs:
       ScriptPath: '$(System.DefaultWorkingDirectory)/login.dfe.infrastructure/drop/powershell/Set-ResourceGroupTags.ps1'
       ScriptArguments: '-ResourceGroupName "$(LinuxAppServiceResourceGroupName)" -Environment "$(EnvironmentTag)" -ParentBusiness "$(ParentBusinessTag)" -ServiceOffering "$(ServiceOffering)"'
       azurePowerShellVersion: 'LatestVersion'
+      pwsh: true
       archiveFilePatterns: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)/Drop/*.zip'
       destinationFolder: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)/Drop/Publish'
