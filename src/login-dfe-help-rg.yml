@@ -18,9 +18,9 @@ jobs:
   cancelTimeoutInMinutes: 1
   pool:
     vmImage: windows-2019
-steps:
-- task: AzurePowerShell@3
-  displayName: 'Create and Tag Resource Group'
+  steps:
+  - task: AzurePowerShell@3
+    displayName: 'Create and Tag Resource Group'
   inputs:
     azureSubscription: 'CIP Dev Subscription (SignIn)'
     ScriptPath: '$(System.DefaultWorkingDirectory)/login.dfe.infrastructure/drop/powershell/Set-ResourceGroupTags.ps1'
@@ -28,8 +28,8 @@ steps:
     azurePowerShellVersion: LatestVersion
 
   steps:
-- task: ExtractFiles@1
-  displayName: 'Extract Build Artifact'
+  - task: ExtractFiles@1
+    displayName: 'Extract Build Artifact'
   inputs:
     archiveFilePatterns: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)/Drop/*.zip'
     destinationFolder: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)/Drop/Publish'
