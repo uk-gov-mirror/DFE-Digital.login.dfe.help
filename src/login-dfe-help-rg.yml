@@ -1,0 +1,29 @@
+#Your build pipeline references an undefined variable named ‘LinuxAppServiceResourceGroupName’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+#Your build pipeline references an undefined variable named ‘EnvironmentTag’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+#Your build pipeline references an undefined variable named ‘ParentBusinessTag’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+#Your build pipeline references an undefined variable named ‘ServiceOffering’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+parameters:
+- name: LinuxAppServiceResourceGroupName
+  type: string
+- name: EnvironmentTag
+  type: string
+- name: ParentBusinessTag
+  type: string
+- name: ServiceOffering
+  type: string
+
+steps:
+- task: AzurePowerShell@3
+  displayName: 'Create and Tag Resource Group'
+  inputs:
+    azureSubscription: 'CIP Dev Subscription (SignIn)'
+    ScriptPath: '$(System.DefaultWorkingDirectory)/login.dfe.infrastructure/drop/powershell/Set-ResourceGroupTags.ps1'
+    ScriptArguments: '-ResourceGroupName "$(LinuxAppServiceResourceGroupName)" -Environment "$(EnvironmentTag)" -ParentBusiness "$(ParentBusinessTag)" -ServiceOffering "$(ServiceOffering)"'
+    azurePowerShellVersion: LatestVersion
+
+  steps:
+- task: ExtractFiles@1
+  displayName: 'Extract Build Artifact'
+  inputs:
+    archiveFilePatterns: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)/Drop/*.zip'
+    destinationFolder: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)/Drop/Publish'
