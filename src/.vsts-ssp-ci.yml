@@ -37,7 +37,7 @@ stages:
         subscriptionId: $(devSubscriptionId)
         LinuxAppServiceResourceGroupName: $(LinuxAppServiceResourceGroupName)
         EnvironmentTag: $(EnvironmentTag)
-        ParentBusinessTag: $(ParentBusinessTag)
+        ParentBusinessTag: $(subscriptionId)
         ServiceOffering: $(ServiceOffering)
 #
 #  - stage: Copyfiles
