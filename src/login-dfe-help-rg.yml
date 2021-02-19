@@ -27,6 +27,6 @@ jobs:
       azureSubscription: 'CIP Dev Subscription (SignIn)'
       ScriptPath: '$(System.DefaultWorkingDirectory)/login.dfe.infrastructure/drop/powershell/Set-ResourceGroupTags.ps1'
       ScriptArguments: '-ResourceGroupName "$(LinuxAppServiceResourceGroupName)" -Environment "$(EnvironmentTag)" -ParentBusiness "$(ParentBusinessTag)" -ServiceOffering "$(ServiceOffering)"'
-      azurePowerShellVersion: 1.0.1
+      azurePowerShellVersion: '1.0.1'
       archiveFilePatterns: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)/Drop/*.zip'
       destinationFolder: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)/Drop/Publish'
