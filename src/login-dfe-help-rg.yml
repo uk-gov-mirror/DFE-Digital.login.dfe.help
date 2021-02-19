@@ -26,7 +26,8 @@ jobs:
   - task: AzurePowerShell@3
     displayName: 'Create and Tag Resource Group'
     inputs:
-      subscriptionId: '${{parameters.serviceConnection}}'
+      ConnectedServiceNameARM: "${{parameters.ServiceConnection}}"
+      subscriptionId: '${{parameters.subscriptionId}}'
       ScriptPath: '$(System.DefaultWorkingDirectory)/login.dfe.infrastructure/drop/powershell/Set-ResourceGroupTags.ps1'
       ScriptArguments: '-ResourceGroupName "$(LinuxAppServiceResourceGroupName)" -Environment "$(EnvironmentTag)" -ParentBusiness "$(ParentBusinessTag)" -ServiceOffering "$(ServiceOffering)"'
       azurePowerShellVersion: LatestVersion
