@@ -32,7 +32,9 @@ stages:
     displayName: 'Create and Tag Resource Group'
     jobs:
     - template: login-dfe-help-rg.yml
-      parameters:
+      parameters: 
+        serviceConnection: $(devServiceConnection)
+        subscriptionId: $(devSubscriptionId)   
         LinuxAppServiceResourceGroupName: $(LinuxAppServiceResourceGroupName)
         EnvironmentTag: $(EnvironmentTag)
         ParentBusinessTag: $(ParentBusinessTag)
