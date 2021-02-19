@@ -7,11 +7,13 @@ parameters:
   type: string
 - name: EnvironmentTag
   type: string
-- name: subscriptionId
+- name: ParentBusinessTag
   type: string
 - name: ServiceOffering
   type: string
 - name: serviceConnection
+  type: string
+- name: subscriptionId
   type: string
 
 jobs:
