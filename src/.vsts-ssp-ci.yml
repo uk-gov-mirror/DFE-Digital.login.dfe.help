@@ -25,21 +25,21 @@ stages:
       parameters:
         serviceConnection: $(ServiceConnection)
         subscriptionId: $(SubscriptionId)   
-
-  - stage: Copyfiles
-    dependsOn: preDeploy
-    displayName: Copyfiles
-    jobs:
-    - template: login-dfe-help-copy-files.yml
-      parameters:
-        ArtifactStagingDirectory: $(ArtifactStagingDirectory)
-        DefaultWorkingDirectory: $(DefaultWorkingDirectory)
-    
-  - stage: PublishFiles
-    dependsOn: Copyfiles
-    displayName: PublishFiles
-    jobs:
-    - template: login-dfe-help-copy-files.yml
-      parameters:
-        ArtifactStagingDirectory: $(ArtifactStagingDirectory)
-        DefaultWorkingDirectory: $(DefaultWorkingDirectory)
+#
+#  - stage: Copyfiles
+#    dependsOn: preDeploy
+#    displayName: Copyfiles
+#    jobs:
+#    - template: login-dfe-help-copy-files.yml
+#      parameters:
+#        ArtifactStagingDirectory: $(ArtifactStagingDirectory)
+#        DefaultWorkingDirectory: $(DefaultWorkingDirectory)
+#    
+#  - stage: PublishFiles
+#    dependsOn: Copyfiles
+#    displayName: PublishFiles
+#    jobs:
+#    - template: login-dfe-help-copy-files.yml
+#      parameters:
+#        ArtifactStagingDirectory: $(ArtifactStagingDirectory)
+#        DefaultWorkingDirectory: $(DefaultWorkingDirectory)
