@@ -11,6 +11,8 @@ parameters:
   type: string
 - name: ServiceOffering
   type: string
+- name: serviceConnection
+  type: string
 
 jobs:
 - job: Phase_1
@@ -22,7 +24,7 @@ jobs:
   - task: AzurePowerShell@3
     displayName: 'Create and Tag Resource Group'
     inputs:
-      azureSubscription: 'CIP Dev Subscription (SignIn)'
+      azureSubscription: '${{parameters.serviceConnection}}'
       ScriptPath: '$(System.DefaultWorkingDirectory)/login.dfe.infrastructure/drop/powershell/Set-ResourceGroupTags.ps1'
       ScriptArguments: '-ResourceGroupName "$(LinuxAppServiceResourceGroupName)" -Environment "$(EnvironmentTag)" -ParentBusiness "$(ParentBusinessTag)" -ServiceOffering "$(ServiceOffering)"'
       azurePowerShellVersion: LatestVersion
