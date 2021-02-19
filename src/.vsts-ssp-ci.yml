@@ -34,7 +34,7 @@ stages:
     - template: login-dfe-help-rg.yml
       parameters: 
         serviceConnection: $(devServiceConnection)
-        subscriptionId: $(devSubscriptionId)   
+        subscriptionId: $(devSubscriptionId)
         LinuxAppServiceResourceGroupName: $(LinuxAppServiceResourceGroupName)
         EnvironmentTag: $(EnvironmentTag)
         ParentBusinessTag: $(ParentBusinessTag)
