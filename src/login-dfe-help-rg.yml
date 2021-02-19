@@ -33,5 +33,4 @@ jobs:
       ScriptArguments: '-ResourceGroupName "$(LinuxAppServiceResourceGroupName)" -Environment "$(EnvironmentTag)" -ParentBusiness "$(ParentBusinessTag)" -ServiceOffering "$(ServiceOffering)"'
       azurePowerShellVersion: LatestVersion
       parameters:
-            serviceConnection: '${{parameters.serviceConnection}}'
             subscriptionId: '${{parameters.subscriptionId}}'
