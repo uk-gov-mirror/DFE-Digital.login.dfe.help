@@ -21,15 +21,12 @@ jobs:
   steps:
   - task: AzurePowerShell@3
     displayName: 'Create and Tag Resource Group'
+  - task: ExtractFiles@1
+    displayName: 'Extract Build Artifact'
   inputs:
     azureSubscription: 'CIP Dev Subscription (SignIn)'
     ScriptPath: '$(System.DefaultWorkingDirectory)/login.dfe.infrastructure/drop/powershell/Set-ResourceGroupTags.ps1'
     ScriptArguments: '-ResourceGroupName "$(LinuxAppServiceResourceGroupName)" -Environment "$(EnvironmentTag)" -ParentBusiness "$(ParentBusinessTag)" -ServiceOffering "$(ServiceOffering)"'
     azurePowerShellVersion: LatestVersion
-
-  steps:
-  - task: ExtractFiles@1
-    displayName: 'Extract Build Artifact'
-  inputs:
     archiveFilePatterns: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)/Drop/*.zip'
     destinationFolder: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)/Drop/Publish'
