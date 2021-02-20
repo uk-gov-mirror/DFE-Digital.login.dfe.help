@@ -6,7 +6,7 @@ resources:
     endpoint: DfE-Digital
     name: DFE-Digital/login.dfe.help
     ref: master
-  - repository: login.dfe.infrastructure
+  - repository: infrastructure
     type: github
     endpoint: DfE-Digital
     name: DFE-Digital/login.dfe.infrastructure

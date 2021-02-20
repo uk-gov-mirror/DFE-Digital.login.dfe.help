@@ -15,6 +15,7 @@ jobs:
     - npm
   steps:
   - checkout: self
+  - checkout: infrastructure
     clean: true
   - task: Npm@1
     displayName: npm install
