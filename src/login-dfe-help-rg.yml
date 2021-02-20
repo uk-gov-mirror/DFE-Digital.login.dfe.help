@@ -19,6 +19,8 @@ jobs:
   pool:
     vmImage: windows-2019
   steps:
+  - checkout: self
+  - checkout: infrastructure
   - task: AzurePowerShell@3
     displayName: 'Create and Tag Resource Group'
     inputs:
