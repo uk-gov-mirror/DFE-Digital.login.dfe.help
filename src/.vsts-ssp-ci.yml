@@ -35,7 +35,7 @@ stages:
       parameters: 
         serviceConnection: $(devServiceConnection)
         subscriptionId: $(devSubscriptionId)
-        devresourceGroupName: $(devresourceGroupName)
+        resourceGroupName: $(devresourceGroupName)
         EnvironmentTag: $(EnvironmentTag)
         ParentBusinessTag: $(subscriptionId)
         ServiceOffering: $(ServiceOffering)
