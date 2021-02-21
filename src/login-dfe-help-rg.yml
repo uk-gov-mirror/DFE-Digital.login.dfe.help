@@ -27,6 +27,6 @@ jobs:
       azureSubscription: '${{parameters.serviceConnection}}'
       ConnectedServiceNameARM: "${{parameters.ServiceConnection}}"
       subscriptionId: '${{parameters.subscriptionId}}'
-      ScriptPath: '$(System.DefaultWorkingDirectory)/login.dfe.infrastructure/drop/powershell/Set-ResourceGroupTags.ps1'
+      ScriptPath: '$(System.DefaultWorkingDirectory)/login.dfe.infrastructure/powershell/Set-ResourceGroupTags.ps1'
       ScriptArguments: '-ResourceGroupName "$(devresourceGroupName)" -Environment "$(EnvironmentTag)" -ParentBusiness "$(ParentBusinessTag)" -ServiceOffering "$(ServiceOffering)"'
       azurePowerShellVersion: LatestVersion
