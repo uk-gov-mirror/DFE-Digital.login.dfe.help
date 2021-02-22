@@ -42,26 +42,26 @@ jobs:
       Contents: '$(LinuxConfigFileName)'
       TargetFolder: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)/Drop/Publish/config/'
       OverWrite: true
-    - task: CopyFiles@2
+  - task: CopyFiles@2
     displayName: 'Copy process.json PM2 script file'
     inputs:
       SourceFolder: '$(System.DefaultWorkingDirectory)/login.dfe.config//Drop/$(EnvironmentName)'
       Contents: process.json
       TargetFolder: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)/Drop/Publish/'
       OverWrite: true
-    - task: TotalALM.totalalm-tokenization.tokenization-build-task.Tokenization@2
+  - task: TotalALM.totalalm-tokenization.tokenization-build-task.Tokenization@2
     displayName: 'Tokenization: Transform file $(LinuxConfigFileName)'
     inputs:
       SourcePath: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)/Drop/Publish/config/'
       TargetFileNames: '$(LinuxConfigFileName)'
       RequireVariable: true
-    - task: TotalALM.totalalm-tokenization.tokenization-build-task.Tokenization@2
+  - task: TotalALM.totalalm-tokenization.tokenization-build-task.Tokenization@2
     displayName: 'Tokenization: Transform file process.json'
     inputs:
       SourcePath: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)/Drop/Publish/'
       TargetFileNames: process.json
       RequireVariable: true
-    - task: ArchiveFiles@1
+  - task: ArchiveFiles@1
     displayName: 'Create Package'
     inputs:
       rootFolder: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)/Drop/Publish'
