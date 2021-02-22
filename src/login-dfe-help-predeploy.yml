@@ -76,5 +76,5 @@ jobs:
     inputs:
       PathtoPublish: $(Build.ArtifactStagingDirectory)
       ArtifactName: Drop
-      TargetPath: '\\my\share\$(Build.DefinitionName)\$(Build.BuildNumber)'
+      TargetPath: '$(Build.DefinitionName)\$(Build.BuildNumber)'
 ...
