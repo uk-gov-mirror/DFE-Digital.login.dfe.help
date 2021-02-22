@@ -28,7 +28,7 @@ jobs:
       buildType: 'current'
       downloadType: 'single'
       ArtifactName: '$(Build.ArtifactStagingDirectory)/**/$(Build.BuildId).zip'
-      downloadPath: '$(System.ArtifactsDirectory)/Publish'
+      downloadPath: '$(Build.ArtifactStagingDirectory)/Publish'
   - task: AzurePowerShell@3
     displayName: 'Create and Tag Resource Group'
     inputs:
