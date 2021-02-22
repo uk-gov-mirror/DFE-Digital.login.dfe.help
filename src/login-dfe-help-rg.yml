@@ -33,8 +33,8 @@ jobs:
   - task: ExtractFiles@1
     displayName: 'Extract Build Artifact'
     inputs:
-      archiveFilePatterns: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)/Drop/*.zip'
-      destinationFolder: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)/Drop/Publish'
+      archiveFilePatterns: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)/*.zip'
+      destinationFolder: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)'
   - task: CopyFiles@2
     displayName: 'Copy App Configuration (Linux POC)'
     inputs:
