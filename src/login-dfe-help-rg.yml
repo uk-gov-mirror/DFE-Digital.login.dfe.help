@@ -13,6 +13,7 @@ parameters:
   type: string
 - name: artifactName
   type: string
+  default: '$(BuildID)'
 
 jobs:
 - job: Phase_1
