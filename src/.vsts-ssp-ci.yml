@@ -49,6 +49,7 @@ stages:
         EnvironmentTag: $(EnvironmentTag)
         ParentBusinessTag: $(subscriptionId)
         ServiceOffering: $(ServiceOffering)
+        LinuxConfigFileName: $(LinuxConfigFileName)
 
 #
 #  - stage: Copyfiles
