@@ -23,6 +23,12 @@ jobs:
   - checkout: self
   - checkout: infrastructure
   - checkout: config
+  - task: DownloadBuildArtifacts@0
+    inputs:
+      buildType: 'current'
+      downloadType: 'single'
+      ArtifactName: '$(Build.ArtifactStagingDirectory)/**/$(Build.BuildId).zip'
+      downloadPath: '$(System.ArtifactsDirectory)/Publish'
   - task: AzurePowerShell@3
     displayName: 'Create and Tag Resource Group'
     inputs:
@@ -36,7 +42,7 @@ jobs:
     displayName: Unzip Artifact
     inputs:
       archiveFilePatterns: '$(Build.ArtifactStagingDirectory)/**/$(Build.BuildId).zip' 
-      destinationFolder: '$(Build.ArtifactStagingDirectory)/temp1'
+      destinationFolder: '$(Build.ArtifactStagingDirectory)/Publish'
       cleanDestinationFolder: false
   - task: CopyFiles@2
     displayName: 'Copy App Configuration (Linux POC)'
