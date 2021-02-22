@@ -11,6 +11,11 @@ resources:
     endpoint: DfE-Digital
     name: DFE-Digital/login.dfe.infrastructure
     ref: master
+  - repository: config
+    type: github
+    endpoint: DfE-Digital
+    name: DFE-Digital/login.dfe.config
+    ref: master    
 trigger:
   branches:
     include:

@@ -21,6 +21,7 @@ jobs:
   steps:
   - checkout: self
   - checkout: infrastructure
+  - checkout: config
   - task: AzurePowerShell@3
     displayName: 'Create and Tag Resource Group'
     inputs:
@@ -38,9 +39,9 @@ jobs:
   - task: CopyFiles@2
     displayName: 'Copy App Configuration (Linux POC)'
     inputs:
-      SourceFolder: '$(System.DefaultWorkingDirectory)/$(EnvironmentName)'
+      SourceFolder: '$(System.DefaultWorkingDirectory)/login.dfe.config/Drop/$(EnvironmentName)'
       Contents: '$(LinuxConfigFileName)'
-      TargetFolder: '$(System.DefaultWorkingDirectory)/config/'
+      TargetFolder: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)/Drop/Publish/config/'
       OverWrite: true
   - task: CopyFiles@2
     displayName: 'Copy process.json PM2 script file'
