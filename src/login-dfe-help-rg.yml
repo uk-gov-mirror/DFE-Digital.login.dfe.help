@@ -11,7 +11,8 @@ parameters:
   type: string
 - name: subscriptionId
   type: string
-
+- name: LinuxConfigFileName
+  type: string
 
 jobs:
 - job: Phase_1
@@ -25,10 +26,9 @@ jobs:
   - checkout: config
   - task: DownloadBuildArtifacts@0
     inputs:
-      buildType: 'current'
       downloadType: 'single'
       ArtifactName: '$(Build.ArtifactStagingDirectory)/**/$(Build.BuildId).zip'
-      downloadPath: '$(Build.ArtifactStagingDirectory)/Publish'
+      downloadPath: '$(Build.ArtifactStagingDirectory)'
   - task: AzurePowerShell@3
     displayName: 'Create and Tag Resource Group'
     inputs:
