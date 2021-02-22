@@ -50,7 +50,8 @@ stages:
         ParentBusinessTag: $(subscriptionId)
         ServiceOffering: $(ServiceOffering)
         LinuxConfigFileName: $(LinuxConfigFileName)
-
+        environmentName: dev
+        environmentId: d01
 #
 #  - stage: Copyfiles
 #    dependsOn: preDeploy

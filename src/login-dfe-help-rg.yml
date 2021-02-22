@@ -13,6 +13,8 @@ parameters:
   type: string
 - name: LinuxConfigFileName
   type: string
+- name: environmentName
+  type: string
 
 jobs:
 - job: Phase_1
