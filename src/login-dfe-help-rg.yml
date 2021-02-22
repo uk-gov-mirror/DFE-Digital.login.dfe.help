@@ -11,9 +11,7 @@ parameters:
   type: string
 - name: subscriptionId
   type: string
-- name: artifactName
-  type: string
-  default: '$(BuildID)'
+
 
 jobs:
 - job: Phase_1
@@ -37,8 +35,9 @@ jobs:
   - task: ExtractFiles@1
     displayName: Unzip Artifact
     inputs:
-      archiveFilePatterns: '$(Pipeline.Workspace)\${{parameters.artifactName}}\${{parameters.artifactName}}.zip'
-      destinationFolder: '$(System.DefaultWorkingDirectory)\${{parameters.artifactName}}\'
+      archiveFilePatterns: '$(Build.ArtifactStagingDirectory)/**/$(Build.BuildId).zip' 
+      destinationFolder: '$(Build.ArtifactStagingDirectory)/temp1'
+      cleanDestinationFolder: false
   - task: CopyFiles@2
     displayName: 'Copy App Configuration (Linux POC)'
     inputs:
