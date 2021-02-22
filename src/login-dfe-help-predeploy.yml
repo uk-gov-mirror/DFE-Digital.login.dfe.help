@@ -46,7 +46,7 @@ jobs:
       verbose: false
       customCommand: install --production --json
   - task: CopyFiles@2
-    displayName: 'Copy Files to: $(System.DefaultWorkingDirectory)\Publish'
+    displayName: 'Copy Files to: $(System.DefaultWorkingDirectory)/Publish'
     inputs:
       SourceFolder: $(System.DefaultWorkingDirectory)
       Contents: >-
@@ -58,12 +58,12 @@ jobs:
         external_modules\**
         package.json
         web.config
-      TargetFolder: $(System.DefaultWorkingDirectory)\Publish
+      TargetFolder: $(System.DefaultWorkingDirectory)/Publish
       CleanTargetFolder: true
   - task: ArchiveFiles@1
     displayName: 'Archive files '
     inputs:
-      rootFolder: $(System.DefaultWorkingDirectory)\Publish
+      rootFolder: $(System.DefaultWorkingDirectory)/Publish
       includeRootFolder: false
   - task: CopyFiles@2
     displayName: Copy any database scripts
