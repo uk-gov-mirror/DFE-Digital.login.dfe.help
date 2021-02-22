@@ -24,21 +24,6 @@ jobs:
   - checkout: self
   - checkout: infrastructure
   - checkout: config
-  - task: DownloadBuildArtifacts@0
-    inputs:
-      buildType: 'current'
-      downloadType: 'single'
-      ArtifactName: '$(Build.ArtifactStagingDirectory)/**/$(Build.BuildId).zip'
-      downloadPath: '$(Build.ArtifactStagingDirectory)'
-  - task: AzurePowerShell@3
-    displayName: 'Create and Tag Resource Group'
-    inputs:
-      azureSubscription: '${{parameters.serviceConnection}}'
-      ConnectedServiceNameARM: "${{parameters.ServiceConnection}}"
-      subscriptionId: '${{parameters.subscriptionId}}'
-      ScriptPath: '$(System.DefaultWorkingDirectory)/login.dfe.infrastructure/powershell/Set-ResourceGroupTags.ps1'
-      ScriptArguments: '-ResourceGroupName "$(devresourceGroupName)" -Environment "$(EnvironmentTag)" -ParentBusiness "$(ParentBusinessTag)" -ServiceOffering "$(ServiceOffering)"'
-      azurePowerShellVersion: LatestVersion
   - task: ExtractFiles@1
     displayName: Unzip Artifact
     inputs:
@@ -77,3 +62,12 @@ jobs:
       rootFolder: '$(System.DefaultWorkingDirectory)'
       includeRootFolder: false
       archiveFile: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)-$(Build.BuildId).zip'
+  - task: AzurePowerShell@3
+    displayName: 'Create and Tag Resource Group'
+    inputs:
+      azureSubscription: '${{parameters.serviceConnection}}'
+      ConnectedServiceNameARM: "${{parameters.ServiceConnection}}"
+      subscriptionId: '${{parameters.subscriptionId}}'
+      ScriptPath: '$(System.DefaultWorkingDirectory)/login.dfe.infrastructure/powershell/Set-ResourceGroupTags.ps1'
+      ScriptArguments: '-ResourceGroupName "$(devresourceGroupName)" -Environment "$(EnvironmentTag)" -ParentBusiness "$(ParentBusinessTag)" -ServiceOffering "$(ServiceOffering)"'
+      azurePowerShellVersion: LatestVersion
