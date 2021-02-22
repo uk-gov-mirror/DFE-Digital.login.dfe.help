@@ -33,37 +33,37 @@ jobs:
   - task: ExtractFiles@1
     displayName: 'Extract Build Artifact'
     inputs:
-      archiveFilePatterns: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)/*.zip'
-      destinationFolder: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)'
+      archiveFilePatterns: '$(System.DefaultWorkingDirectory)/*.zip'
+      destinationFolder: '$(System.DefaultWorkingDirectory)'
   - task: CopyFiles@2
     displayName: 'Copy App Configuration (Linux POC)'
     inputs:
-      SourceFolder: '$(System.DefaultWorkingDirectory)/login.dfe.config/Drop/$(EnvironmentName)'
+      SourceFolder: '$(System.DefaultWorkingDirectory)/$(EnvironmentName)'
       Contents: '$(LinuxConfigFileName)'
-      TargetFolder: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)/Drop/Publish/config/'
+      TargetFolder: '$(System.DefaultWorkingDirectory)/config/'
       OverWrite: true
   - task: CopyFiles@2
     displayName: 'Copy process.json PM2 script file'
     inputs:
-      SourceFolder: '$(System.DefaultWorkingDirectory)/login.dfe.config//Drop/$(EnvironmentName)'
+      SourceFolder: '$(System.DefaultWorkingDirectory)/$(EnvironmentName)'
       Contents: process.json
-      TargetFolder: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)/Drop/Publish/'
+      TargetFolder: '$(System.DefaultWorkingDirectory)'
       OverWrite: true
   - task: TotalALM.totalalm-tokenization.tokenization-build-task.Tokenization@2
     displayName: 'Tokenization: Transform file $(LinuxConfigFileName)'
     inputs:
-      SourcePath: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)/Drop/Publish/config/'
+      SourcePath: '$(System.DefaultWorkingDirectory)/config/'
       TargetFileNames: '$(LinuxConfigFileName)'
       RequireVariable: true
   - task: TotalALM.totalalm-tokenization.tokenization-build-task.Tokenization@2
     displayName: 'Tokenization: Transform file process.json'
     inputs:
-      SourcePath: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)/Drop/Publish/'
+      SourcePath: '$(System.DefaultWorkingDirectory)'
       TargetFileNames: process.json
       RequireVariable: true
   - task: ArchiveFiles@1
     displayName: 'Create Package'
     inputs:
-      rootFolder: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)/Drop/Publish'
+      rootFolder: '$(System.DefaultWorkingDirectory)'
       includeRootFolder: false
-      archiveFile: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)/Drop/Publish/$(Release.DefinitionName)-$(Build.BuildId).zip'
+      archiveFile: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)-$(Build.BuildId).zip'
