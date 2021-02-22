@@ -30,3 +30,40 @@ jobs:
       ScriptPath: '$(System.DefaultWorkingDirectory)/login.dfe.infrastructure/powershell/Set-ResourceGroupTags.ps1'
       ScriptArguments: '-ResourceGroupName "$(devresourceGroupName)" -Environment "$(EnvironmentTag)" -ParentBusiness "$(ParentBusinessTag)" -ServiceOffering "$(ServiceOffering)"'
       azurePowerShellVersion: LatestVersion
+  - task: ExtractFiles@1
+    displayName: 'Extract Build Artifact'
+    inputs:
+      archiveFilePatterns: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)/Drop/*.zip'
+      destinationFolder: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)/Drop/Publish'
+  - task: CopyFiles@2
+    displayName: 'Copy App Configuration (Linux POC)'
+    inputs:
+      SourceFolder: '$(System.DefaultWorkingDirectory)/login.dfe.config/Drop/$(EnvironmentName)'
+      Contents: '$(LinuxConfigFileName)'
+      TargetFolder: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)/Drop/Publish/config/'
+      OverWrite: true
+    - task: CopyFiles@2
+    displayName: 'Copy process.json PM2 script file'
+    inputs:
+      SourceFolder: '$(System.DefaultWorkingDirectory)/login.dfe.config//Drop/$(EnvironmentName)'
+      Contents: process.json
+      TargetFolder: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)/Drop/Publish/'
+      OverWrite: true
+    - task: TotalALM.totalalm-tokenization.tokenization-build-task.Tokenization@2
+    displayName: 'Tokenization: Transform file $(LinuxConfigFileName)'
+    inputs:
+      SourcePath: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)/Drop/Publish/config/'
+      TargetFileNames: '$(LinuxConfigFileName)'
+      RequireVariable: true
+    - task: TotalALM.totalalm-tokenization.tokenization-build-task.Tokenization@2
+    displayName: 'Tokenization: Transform file process.json'
+    inputs:
+      SourcePath: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)/Drop/Publish/'
+      TargetFileNames: process.json
+      RequireVariable: true
+    - task: ArchiveFiles@1
+    displayName: 'Create Package'
+    inputs:
+      rootFolder: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)/Drop/Publish'
+      includeRootFolder: false
+      archiveFile: '$(System.DefaultWorkingDirectory)/$(Release.DefinitionName)/Drop/Publish/$(Release.DefinitionName)-$(Build.BuildId).zip'
