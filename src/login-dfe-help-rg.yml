@@ -11,6 +11,8 @@ parameters:
   type: string
 - name: subscriptionId
   type: string
+- name: artifactName
+  type: string
 
 jobs:
 - job: Phase_1
@@ -32,12 +34,10 @@ jobs:
       ScriptArguments: '-ResourceGroupName "$(devresourceGroupName)" -Environment "$(EnvironmentTag)" -ParentBusiness "$(ParentBusinessTag)" -ServiceOffering "$(ServiceOffering)"'
       azurePowerShellVersion: LatestVersion
   - task: ExtractFiles@1
-    displayName: 'Extract Build Artifact'
+    displayName: Unzip Artifact
     inputs:
-      archiveFilePatterns: '$(Build.ArtifactStagingDirectory)/*.zip'
-      destinationFolder: '$(System.DefaultWorkingDirectory)'
-      cleanDestinationFolder: true
-      overwriteExistingFiles: false
+      archiveFilePatterns: '$(Pipeline.Workspace)\${{parameters.artifactName}}\${{parameters.artifactName}}.zip'
+      destinationFolder: '$(System.DefaultWorkingDirectory)\${{parameters.artifactName}}\'
   - task: CopyFiles@2
     displayName: 'Copy App Configuration (Linux POC)'
     inputs:

@@ -3,6 +3,8 @@ parameters:
   type: string
 - name: subscriptionId
   type: string
+- name: artifactName
+  type: string
 
 jobs:
 - job: Phase_1
@@ -74,7 +76,7 @@ jobs:
   - task: PublishBuildArtifacts@1
     displayName: Publish Build Artifact
     inputs:
-      PathtoPublish: $(Build.ArtifactStagingDirectory)
-      ArtifactName: Drop
-      TargetPath: '$(Build.DefinitionName)\$(Build.BuildNumber)'
+      targetPath: $(Build.ArtifactStagingDirectory)/${{parameters.artifactName}}.zip
+      artifact: ${{parameters.artifactName}}
+      publishLocation: 'pipeline'
 ...
