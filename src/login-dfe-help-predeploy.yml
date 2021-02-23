@@ -58,7 +58,7 @@ jobs:
         external_modules\**
         package.json
         web.config
-      TargetFolder: $(System.DefaultWorkingDirectory)
+      TargetFolder: $(Build.ArtifactStagingDirectory)\
       CleanTargetFolder: true
   - task: ArchiveFiles@1
     displayName: 'Archive files '
@@ -70,7 +70,7 @@ jobs:
     inputs:
       SourceFolder: $(System.DefaultWorkingDirectory)
       Contents: database_scripts\**
-      TargetFolder: $(Build.ArtifactStagingDirectory)
+      TargetFolder: $(Build.ArtifactStagingDirectory)\
   - task: PublishBuildArtifacts@1
     displayName: Publish Build Artifact
     inputs:

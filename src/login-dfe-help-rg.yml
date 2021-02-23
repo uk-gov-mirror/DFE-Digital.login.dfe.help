@@ -13,7 +13,7 @@ parameters:
   type: string
 - name: LinuxConfigFileName
   type: string
-- name: environmentName
+- name: EnvironmentName
   type: string
 
 jobs:
