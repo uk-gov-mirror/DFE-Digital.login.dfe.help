@@ -58,12 +58,12 @@ jobs:
         external_modules\**
         package.json
         web.config
-      TargetFolder: $(Build.ArtifactStagingDirectory)\Publish
+      TargetFolder: $(Build.ArtifactStagingDirectory)\
       CleanTargetFolder: true
   - task: ArchiveFiles@1
     displayName: 'Archive files '
     inputs:
-      rootFolder: $(System.ArtifactStagingDirectory)\Publish
+      rootFolder: $(System.ArtifactStagingDirectory)\
       includeRootFolder: false
   - task: CopyFiles@2
     displayName: Copy any database scripts
