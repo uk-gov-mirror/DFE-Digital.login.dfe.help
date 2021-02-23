@@ -3,7 +3,6 @@ parameters:
   type: string
 - name: subscriptionId
   type: string
-
 jobs:
 - job: Phase_1
   displayName: Phase 1
@@ -58,22 +57,22 @@ jobs:
         external_modules\**
         package.json
         web.config
-      TargetFolder: $(Build.ArtifactStagingDirectory)\
+      TargetFolder: $(System.DefaultWorkingDirectory)
       CleanTargetFolder: true
   - task: ArchiveFiles@1
     displayName: 'Archive files '
     inputs:
-      rootFolder: $(System.ArtifactStagingDirectory)\
+      rootFolder: $(System.DefaultWorkingDirectory)
       includeRootFolder: false
   - task: CopyFiles@2
     displayName: Copy any database scripts
     inputs:
       SourceFolder: $(System.DefaultWorkingDirectory)
       Contents: database_scripts\**
-      TargetFolder: $(Build.ArtifactStagingDirectory)\
+      TargetFolder: $(Build.ArtifactStagingDirectory)
   - task: PublishBuildArtifacts@1
     displayName: Publish Build Artifact
     inputs:
       pathToPublish: '$(Build.ArtifactStagingDirectory)'
-      artifactName: Drop
+      artifactName: Drop  
 ...
